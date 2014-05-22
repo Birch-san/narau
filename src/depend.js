@@ -7,22 +7,29 @@ requirejs.config({
     //never includes a ".js" extension since
     //the paths config could be for a directory.
     paths: {
+        trace: 'lib/trace',
         jquery: 'lib/jquery-2.1.0.min',
-        preloadjs: 'lib/preloadjs-0.4.1.min'
-    }
+        preloadjs: 'lib/preloadjs-0.4.1.min',
+        easel: 'lib/easeljs-0.7.1.min'
+    },
     shim: {
-        'preloadjs': {
+        preloadjs: {
             exports: 'createjs.PreloadJS'
+        },
+        easel: {
+            exports: 'createjs'
         }
     }
 });
 
 require(
-['preloadjs', 'jquery', 'lib/trace', 'setup', 'core'],
+['preloadjs', 'easel', 'jquery', 'trace', 'setup', 'core'],
 
-function (pre, $, trace, setup, core) {
+function (pre, easel, $, t, setup, core) {
   // default namespace
   window.birchlabs = {};
+  
+  //t.supertrace(window.birchlabs);
 
   setup.main();
 });
