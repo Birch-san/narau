@@ -23,12 +23,12 @@ requirejs.config({
 });
 
 require(
-['preloadjs', 'easel', 'jquery', 'trace', 'setup', 'core'],
+['preloadjs', 'easel', 'jquery', 'trace', 'setup', 'core', 'AssetBox'],
 
-function (pre, easel, $, t, setup, core) {
+function (pre, easel, $, t, setup, core, assetBox) {
   // default namespace
   window.birchlabs = {};
-  
+
   //t.supertrace(window.birchlabs);
 
   setup.main();
