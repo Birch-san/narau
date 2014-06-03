@@ -6,12 +6,13 @@ define(function(require) {
     var core = require('core');
     var preloadjs = require('preloadjs');
     var t = require('trace');
+    var $ = require('jquery');
     
     function doPreload() {
         var manifest = [
             {src:"Cirno.png", id:"baka"}
         ];
-        window.birchlabs.assets = assets = new AssetBox(manifest);
+        var assets = new AssetBox(manifest);
         
         var queue = new createjs.LoadQueue(true, "../img/");
         queue.addEventListener("fileload", assets.handleFileLoad.bind(assets));
@@ -19,8 +20,8 @@ define(function(require) {
         queue.loadManifest(assets.manifest);
 
         function donePreload() {
-            document.body.appendChild(assets.getData().baka);
-            begin();
+            //document.body.appendChild(assets.getData().baka);
+            begin(assets);
         }
     }
 
@@ -28,8 +29,20 @@ define(function(require) {
         doPreload();
     }
 
-    function begin() {
-        core.start();
+    function begin(assets) {
+        var canvas = prepareCanvas();
+        var stage = new createjs.Stage(canvas.id);
+        core.start(stage, assets);
+    }
+    
+    function prepareCanvas() {
+        //var canvas = $('#gameCanvas')
+        var canvas = document.getElementById('gameCanvas');
+        var $gameCanvas = $('#gameCanvas');
+        canvas.setAttribute('width', parseInt($gameCanvas.css('width')));
+        canvas.setAttribute('height', parseInt($gameCanvas.css('height')));
+        
+        return canvas;
     }
 
     return {main: main};

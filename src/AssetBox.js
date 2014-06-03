@@ -17,6 +17,8 @@ define(['trace'], function(t) {
         var bmp = new createjs.Bitmap(img);
         bmp.src = event.item.src;
         bmp.id = event.item.id;
+      
+        img.bmp = bmp;
         //t.trace(this.data);
       
         this.data[bmp.id] = img;
